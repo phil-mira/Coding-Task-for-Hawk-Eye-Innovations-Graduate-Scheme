@@ -65,7 +65,7 @@ class GameScreen:
 
         
         # Display the instructions for the game
-        with open("Instructions.txt", "r") as file:
+        with open("./Python_game/Instructions.txt", "r") as file:
             instructions = file.read()
         self.description_label = tk.Label(self.frame, text=instructions)
         self.root.geometry("800x800")  
