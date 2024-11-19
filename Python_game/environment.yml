@@ -1,4 +1,4 @@
-name: daps-wk4-2
+name: Python_game
 dependencies:
   - python>=3.9
   - anaconda
