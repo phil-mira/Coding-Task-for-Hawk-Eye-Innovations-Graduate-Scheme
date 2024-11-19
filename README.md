@@ -15,3 +15,4 @@ To run this, enter the Python_game folder use the yml file to duplicate the envi
 
 The web app version of the game is more interactive and has a couple extra features. 
 To run this app simply open the Website_game folder and run the run_website.py file.
+This is the recommended version to use.
