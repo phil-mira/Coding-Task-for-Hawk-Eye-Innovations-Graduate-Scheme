@@ -11,7 +11,7 @@ class Card {
 
     // Get the value of the card based on its rank
     getValue() {
-        if (this.rank === 'Joker') return 0; // Assign a special value for Jokers
+        if (this.rank === 'Joker') return 20; // Assign a special value for Jokers
         return ranks.indexOf(this.rank) + 2;
     }
 
