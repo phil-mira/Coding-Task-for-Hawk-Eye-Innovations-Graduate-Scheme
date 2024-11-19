@@ -65,7 +65,7 @@ class GameScreen:
 
         
         # Display the instructions for the game
-        with open("instructions.txt", "r") as file:
+        with open("Instructions.txt", "r") as file:
             instructions = file.read()
         self.description_label = tk.Label(self.frame, text=instructions)
         self.root.geometry("800x800")  
@@ -189,7 +189,7 @@ class GameScreen:
         elif card.rank == 'Red Joker':
             card_filename = "red_joker.png"
         card_filename = f"{card.rank}_of_{card.suit}.png".replace(' ', '_')
-        card_path = os.path.join("PNG-cards-1.3", card_filename)
+        card_path = os.path.join(os.path.dirname(__file__), "..", "PNG-cards-1.3", card_filename)
         image = Image.open(card_path)
         return ImageTk.PhotoImage(image)     
 

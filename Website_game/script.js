@@ -94,7 +94,7 @@ function getCardImage(card) {
         const suit = card.suit.toLowerCase();
         card_filename = `${rank}_of_${suit}.png`
     }
-    return `PNG-cards-1.3/${card_filename}`;
+    return `../PNG-cards-1.3/${card_filename}`;
 }
 
 // Function to display a message for 5 seconds
