@@ -11,7 +11,7 @@ class Card {
 
     // Get the value of the card based on its rank
     getValue() {
-        if (this.rank === 'Joker') return 20; // Assign a special value for Jokers
+        if (this.rank.includes('Joker')) return 20; // Assign a special value for Jokers
         return ranks.indexOf(this.rank) + 2;
     }
 
@@ -39,7 +39,6 @@ class Deck {
         if (includeJokers) {
             for (let joker of jokers) {
                 this.cards.push(new Card('None', joker)); // Add two Jokers
-                this.cards.push(new Card('None', joker));
             }
         }
         this.shuffle();
@@ -81,18 +80,15 @@ $(document).ready(function() {
 
 // Function to get the image path for a given card
 function getCardImage(card) {
-    if (card.rank == 'Black Joker'){
-            card_filename = "black_joker.png"
-    }
-
-    if (card.rank == 'Red Joker'){
-            card_filename = "red_joker.png"
-    }
-
-    else {
+    let card_filename;
+    if (card.rank === 'Black Joker') {
+        card_filename = "black_joker.png";
+    } else if (card.rank === 'Red Joker') {
+        card_filename = "red_joker.png";
+    } else {
         const rank = card.rank.toLowerCase();
         const suit = card.suit.toLowerCase();
-        card_filename = `${rank}_of_${suit}.png`
+        card_filename = `${rank}_of_${suit}.png`;
     }
     return `../PNG-cards-1.3/${card_filename}`;
 }
@@ -123,8 +119,13 @@ function guessHigher() {
         displayMessage('Wrong! The new card is not higher.');
     }
     currentCard = newCard; // Update the current card to the new card
-    // Update the card image to the new card
-    $('#gameCardImage').attr('src', getCardImage(currentCard));
+    // Add the shuffle animation class
+    $('#gameCardImage').addClass('shuffle-animation');
+    // Update the card image to the new card after the animation
+    setTimeout(() => {
+        $('#gameCardImage').attr('src', getCardImage(currentCard));
+        $('#gameCardImage').removeClass('shuffle-animation');
+    }, 500); // Duration of the animation
     updateScore(); // Update the score display
 }
 
@@ -141,7 +142,12 @@ function guessLower() {
         displayMessage('Wrong! The new card is not lower.');
     }
     currentCard = newCard; // Update the current card to the new card
-    // Update the card image to the new card
-    $('#gameCardImage').attr('src', getCardImage(currentCard));
+    // Add the shuffle animation class
+    $('#gameCardImage').addClass('shuffle-animation');
+    // Update the card image to the new card after the animation
+    setTimeout(() => {
+        $('#gameCardImage').attr('src', getCardImage(currentCard));
+        $('#gameCardImage').removeClass('shuffle-animation');
+    }, 500); // Duration of the animation
     updateScore(); // Update the score display
 }

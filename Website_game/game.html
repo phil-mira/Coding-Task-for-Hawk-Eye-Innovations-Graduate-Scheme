@@ -12,21 +12,20 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            margin: 0;
-            background: url('background.png') no-repeat center center fixed;
+            margin: 10;
+            background: url('background.png');
+            background-position: center;
             background-size: cover;
         }
 
         .game-card {
             font-size: 24px;
-            background: url('background.png') no-repeat center center;
-
         }
 
         .message {
-            padding: 10px;
+            padding: 5px;
             background-color: white;
-            margin-top: 20px;
+            margin-top: 5px;
             font-size: 24px;
             border-radius: 10px;
             color: #333;
@@ -35,25 +34,56 @@
         .buttons {
             display: flex;
             gap: 10px;
+            margin-top: 10px;
         }
+
         button {
-            padding: 10px 20px;
-            font-size: 26px;
+            padding: 10px 10px;
+            font-size: 16px;
             cursor: pointer;
         }
 
-        
+        .card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 160px;
+            height: 240px;
+            margin-top: 200px;
+        }
+
+        .shuffle-animation {
+            animation: shuffle 0.5s ease-in-out;
+        }
+
+        @keyframes shuffle {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(0.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <img src="" alt="Game Card" id="gameCardImage" class="game-card">
+    <div class="card-container">
+        <img src="" alt="Game Card" id="gameCardImage" class="game-card" style="transform: scale(0.9);">
+    </div>
+
+    <div style="height: 250px;"></div>
     <div class="message" id="message"></div>
     <div class="buttons">
         <button id="higherButton">Higher</button>
         <button id="lowerButton">Lower</button>
-    </div>
-    <dic class = "message" id="score" ></div>
+    </div> 
+
+    <div class="message" id="score">Score: 0/0</div>
+
     <script src="script.js"></script>
 </body>
 </html>
