@@ -59,97 +59,7 @@ class Player:
         self.hand = []
                    
 
-class GameCardGUI:
-    def __init__(self, root, player):
-        
-        self.player = player
-
-        self.canvas = tk.Canvas(root, width=800, height=800)
-        self.canvas.pack()
-
-        self.card_image = None
-        self.display_card(player.hand[-1])
-
-        self.higher_button = tk.Button(root, text="Higher", command=self.higher)
-        self.higher_button.pack(side=tk.LEFT, padx=20, pady=20)
-
-        self.lower_button = tk.Button(root, text="Lower", command=self.lower)
-        self.lower_button.pack(side=tk.RIGHT, padx=20, pady=20)
-
-    def display_card(self, card):
-        if self.card_image:
-            self.canvas.delete(self.card_image)
-        card_image = self.load_card_image(card)
-        self.card_image = self.canvas.create_image(400, 400, image=card_image)
-        self.canvas.image = card_image
-
-    def higher(self):
-        # Logic for higher button
-        self.player.guess = True
-        self.root.quit()
-
-
-    def lower(self):
-        # Logic for lower button
-        self.player.guess = False
-        self.root.quit()
-       
-      
     
-    def load_card_image(self, card):
-        if card.rank == 'Black Joker':
-            card_filename = "black_joker.png"
-        elif card.rank == 'Red Joker':
-            card_filename = "red_joker.png"
-        card_filename = f"{card.rank}_of_{card.suit}.png".replace(' ', '_')
-        card_path = os.path.join("PNG-cards-1.3", card_filename)
-        image = Image.open(card_path)
-        return ImageTk.PhotoImage(image)
-    
-
-    
-class ResultScreen:
-    def __init__(self, root, player, dealer, result):
-        self.player = player
-        self.dealer = dealer
-        
-        self.frame = tk.Frame(root)
-        self.frame.pack()
-
-        self.canvas = tk.Canvas(self.frame, width=800, height=800)
-        self.canvas.pack()
-
-        self.card_image = None
-        self.display_card(dealer.hand[-1])
-
-        self.result_label = tk.Label(self.frame, text=result)
-        self.result_label.pack()
-
-        self.play_again_button = tk.Button(self.frame, text="Play Again?", command=self.play_again)
-        self.play_again_button.pack()
-    
-    def play_again(self):
-        self.frame.destroy()    
-        return True
-    
-    def load_card_image(self, card):
-        if card.rank == 'Black Joker':
-            card_filename = "black_joker.png"
-        elif card.rank == 'Red Joker':
-            card_filename = "red_joker.png"
-        card_filename = f"{card.rank}_of_{card.suit}.png".replace(' ', '_')
-        card_path = os.path.join("PNG-cards-1.3", card_filename)
-        image = Image.open(card_path)
-        return ImageTk.PhotoImage(image)
-    
-    def display_card(self, card):
-        if self.card_image:
-            self.canvas.delete(self.card_image)
-        card_image = self.load_card_image(card)
-        self.card_image = self.canvas.create_image(400, 400, image=card_image)
-        self.canvas.image = card_image
-
-
 
 class GameScreen:
     def __init__(self, root):
@@ -172,28 +82,47 @@ class GameScreen:
         self.joker_checkbutton.pack()
 
     def start_game(self):
+        self.root.geometry("800x900")
         self.frame.destroy()
+        self.canvas = tk.Canvas(self.root, width=800, height=800)
+        self.canvas.pack()
         self.root.title("Card Game")
         deck = Deck()
         player1 = Player("Player 1")
         dealer = Player("Dealer")
-        play = True
-        while play is True:
-
-            # Deal a card to the player and dealer each
-            player1.draw(deck)
-            dealer.draw(deck)
-
-            # Display the player's hand and ask for a guess
-            player1_guess = GameCardGUI(self.root, player1, dealer)
-            
-            # Evaluate result, display dealer's hand and ask if player wants to play again
-            result = self.evaluate_result(player1, dealer, player1_guess)
-            play = ResultScreen(self.root, player1, dealer, result)
         
-        self.root.quit()
+        #Display the player's hand and ask for a guess
+        player1.draw(deck)
+        dealer.draw(deck)
+        self.display_card(player1.hand[-1])
+        self.guess_label = tk.Label(self.root, text="Will the next card be higher or lower?")
+        self.guess_label.pack()
 
-            
+
+        #Create buttons for player to make a guess
+        self.higher_button = tk.Button(self.root, text="Higher", command=lambda: self.higher(player1, dealer))
+        self.higher_button.pack()
+        self.lower_button = tk.Button(self.root, text="Lower", command=lambda: self.lower(player1, dealer))
+        self.lower_button.pack()
+
+    
+    def higher(self, player, dealer): 
+        # Logic for higher button
+        player.guess = True
+        self.guess_label.destroy()
+        self.higher_button.destroy()
+        self.lower_button.destroy()
+        result = self.evaluate_result(player, dealer, player.guess)
+        self.display_result(result, player, dealer)
+        
+    def lower(self, player, dealer):
+        # Logic for lower button
+        player.guess = False
+        self.guess_label.destroy()
+        self.higher_button.destroy()
+        self.lower_button.destroy()
+        result = self.evaluate_result(player, dealer, player.guess)
+        self.display_result(result, player, dealer)
 
     def evaluate_result(self, player, dealer, player_guess):
         player_card = player.hand[-1]
@@ -205,6 +134,44 @@ class GameScreen:
         else:
             result = "You Lose"
         return result
+
+    def display_result(self, result, player1, dealer):
+        result = self.evaluate_result(player1, dealer, player1.guess)
+        dealer_card = dealer.hand[-1]
+        self.display_card(dealer_card)
+        self.result_label = tk.Label(self.root, text=result)
+        self.result_label.pack()
+        self.play_again_button = tk.Button(self.root, text="Play Again", command=self.play_again)
+        self.play_again_button.pack()
+        self.quit_button = tk.Button(self.root, text="Quit", command=self.quit)
+        self.quit_button.pack()
+
+    def play_again(self):
+        self.canvas.destroy()
+        self.result_label.destroy()
+        self.play_again_button.destroy()
+        self.quit_button.destroy()
+        self.start_game()
+
+    def quit(self):
+        self.root.quit()
+
+    def display_card(self, card):
+        if hasattr(self, 'card_image'):
+            self.canvas.delete(self.card_image)
+        card_image = self.load_card_image(card)
+        self.card_image = self.canvas.create_image(400, 400, image=card_image)
+        self.canvas.image = card_image
+
+    def load_card_image(self, card):
+        if card.rank == 'Black Joker':
+            card_filename = "black_joker.png"
+        elif card.rank == 'Red Joker':
+            card_filename = "red_joker.png"
+        card_filename = f"{card.rank}_of_{card.suit}.png".replace(' ', '_')
+        card_path = os.path.join("PNG-cards-1.3", card_filename)
+        image = Image.open(card_path)
+        return ImageTk.PhotoImage(image)     
 
     def toggle_jokers(self):
         global include_jokers
@@ -225,13 +192,15 @@ class GameScreen:
 
 if __name__ == "__main__":
     
-    
+
     root = tk.Tk()  
     game_screen = GameScreen(root)
     root.protocol("WM_DELETE_WINDOW", root.quit)
     root.mainloop()
     root = tk.Tk()
+
     
+
 
 
 
