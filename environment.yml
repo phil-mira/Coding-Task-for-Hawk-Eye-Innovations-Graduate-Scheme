@@ -1,0 +1,7 @@
+name: daps-wk4-2
+dependencies:
+  - python>=3.9
+  - anaconda
+  - pip
+  - pip:
+    - -r requirements.txt

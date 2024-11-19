@@ -1,0 +1,33 @@
+Higher or Lower Card Game Instructions
+
+
+
+
+Objective:
+The objective of the game is to correctly guess whether the next card drawn from the deck will be higher or lower than the current card.
+
+Setup:
+1. A standard deck of 52 playing cards is used.
+2. Shuffle the deck thoroughly before starting the game.
+
+Gameplay:
+1. Draw the first card from the deck and place it face up.
+2. The player must guess whether the next card drawn will be higher or lower than the current card.
+3. Draw the next card from the deck and place it face up.
+4. If the player's guess is correct, they score a point and continue to guess for the next card.
+5. If the player's guess is incorrect, the game ends and their score is recorded.
+6. Repeat steps 2-5 until the player makes an incorrect guess or the deck is exhausted.
+
+Card Values:
+- Cards are ranked from 2 (lowest) to Ace (highest).
+- Suits do not affect the ranking of the cards.
+
+Special Rules:
+- If the current card and the next card are of the same rank, the player loses the game.
+- The game can be played with multiple players taking turns or as a single-player game.
+
+Winning:
+- The player with the highest score at the end of the game wins.
+- In a single-player game, the objective is to achieve the highest possible score.
+
+Enjoy the game and good luck!
