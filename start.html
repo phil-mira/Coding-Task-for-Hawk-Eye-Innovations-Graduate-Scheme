@@ -23,6 +23,16 @@
             document.getElementById('start-button').addEventListener('click', function() {
                 window.location.href = 'game.html';
             });
+            document.getElementById('include-jokers').addEventListener('change', function() {
+                if (this.checked) {
+                    localStorage.setItem('includeJokers', 'true');
+                } else {
+                    localStorage.setItem('includeJokers', 'false');
+                }
+            });
+             // Set the initial state of the checkbox based on localStorage
+             document.getElementById('include-jokers').checked = localStorage.getItem('includeJokers') === 'true';
+ 
         </script>
         <style>
             
