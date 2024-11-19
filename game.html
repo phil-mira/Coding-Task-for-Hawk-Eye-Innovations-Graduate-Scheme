@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Higher or Lower Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: url('background.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .game-card {
+            font-size: 24px;
+            background: url('background.png') no-repeat center center;
+
+        }
+
+        .message {
+            padding: 10px;
+            background-color: white;
+            margin-top: 20px;
+            font-size: 24px;
+            border-radius: 10px;
+            color: #333;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <img src="" alt="Game Card" id="gameCardImage" class="game-card">
+    <div class="message" id="message"></div>
+    <script src="script.js"></script>
+    <div class="buttons">
+        <button id="higherButton">Higher</button>
+        <button id="lowerButton">Lower</button>
+    </div>
+    
+</body>
+</html>

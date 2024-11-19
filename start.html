@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Card Game!</h1>
+        <p> Click "Start" to begin the game. Guess if the next card will be higher or lower than the current card. 
+            <br> Press the "Higher" button if you think the next card will be higher, or the "Lower" button if you think it will be lower.
+            <br> You can include Jokers in the deck by checking the box below.
+            <br> The game will keep track of your score and display a message after each guess.
+            <br>    
+            <br> Good luck!
+        </p>
+        <button id="start-button">Start</button>
+        <label>
+            <input type="checkbox" id="include-jokers" checked> Include Jokers
+        <script>
+            document.getElementById('start-button').addEventListener('click', function() {
+                window.location.href = 'game.html';
+            });
+        </script>
+        <style>
+            
+            body {
+            font-size: 28px;
+            }
+            
+            button{
+            padding: 10px 20px;
+            font-size: 24px;
+            }
+            
+        </style>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

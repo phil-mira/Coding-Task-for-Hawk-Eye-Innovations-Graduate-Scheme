@@ -1,8 +1,5 @@
 Higher or Lower Card Game Instructions
 
-
-
-
 Objective:
 The objective of the game is to correctly guess whether the next card drawn from the deck will be higher or lower than the current card.
 
